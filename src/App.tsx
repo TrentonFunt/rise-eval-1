@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 
 // Lazy load components for better performance
 const Hero = lazy(() => import('./components/Hero'))
-const StudioSection = lazy(() => import('./components/StudioSection'))
+const WorkSection = lazy(() => import('./components/WorkSection'))
 const VideoSlider = lazy(() => import('./components/VideoSlider'))
 const WorkMarquee = lazy(() => import('./components/WorkMarquee'))
 const Portfolio = lazy(() => import('./components/Portfolio'))
@@ -33,7 +33,7 @@ function App() {
                 <Suspense fallback={<LoadingSpinner />}>
                   <ErrorBoundary>
                     <Hero />
-                    <StudioSection />
+                    <WorkSection />
                     <VideoSlider />
                     <WorkMarquee />
                     <Portfolio />

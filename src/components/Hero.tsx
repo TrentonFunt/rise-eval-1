@@ -81,7 +81,7 @@ const Hero = () => {
       </div>
 
       {/* Subtitle and CTA Section - Below the video */}
-      <div className="relative z-10 min-h-screen flex items-start justify-center bg-white pt-24">
+      <div className="relative z-10 flex items-start justify-center bg-white pt-8 pb-8">
         <motion.div
           className="text-left text-black px-8 w-full"
           variants={containerVariants}
