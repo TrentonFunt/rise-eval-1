@@ -55,6 +55,7 @@ const Hero = () => {
           {/* Main Heading */}
           <motion.h1
             className="text-7xl md:text-9xl lg:text-[12rem] font-light leading-[0.8] tracking-tight text-black"
+            style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
             variants={itemVariants}
           >
             <div className="font-light">Form</div>
@@ -64,8 +65,8 @@ const Hero = () => {
       </div>
 
       {/* Video Section */}
-      <div className="relative w-full h-screen bg-white px-2 md:px-3 lg:px-4">
-        <div className="w-full h-full rounded-2xl overflow-hidden">
+      <div className="relative w-full h-[87vh] bg-white px-2 md:px-3 lg:px-4">
+        <div className="w-full h-full rounded-lg overflow-hidden">
           <video
             className="w-full h-full object-cover"
             autoPlay

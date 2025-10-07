@@ -7,9 +7,7 @@ import Footer from './components/Footer'
 // Lazy load components for better performance
 const Hero = lazy(() => import('./components/Hero'))
 const WorkSection = lazy(() => import('./components/WorkSection'))
-const VideoSlider = lazy(() => import('./components/VideoSlider'))
-const WorkMarquee = lazy(() => import('./components/WorkMarquee'))
-const Portfolio = lazy(() => import('./components/Portfolio'))
+const VideoBlocks = lazy(() => import('./components/VideoBlocks'))
 const Expertise = lazy(() => import('./components/Expertise'))
 const Awards = lazy(() => import('./components/Awards'))
 const TrustedBrands = lazy(() => import('./components/TrustedBrands'))
@@ -34,9 +32,7 @@ function App() {
                   <ErrorBoundary>
                     <Hero />
                     <WorkSection />
-                    <VideoSlider />
-                    <WorkMarquee />
-                    <Portfolio />
+                    <VideoBlocks />
                     <Expertise />
                     <Awards />
                     <TrustedBrands />

@@ -25,11 +25,10 @@ This project aims to create an exact clone of the Form&Fun Studio homepage with:
 ```
 src/
 ├── components/          # React components
-│   ├── Header.tsx      # Navigation header
+│   ├── Header.tsx      # Dynamic navigation header with scroll effects
 │   ├── Hero.tsx        # Hero section with video background
-│   ├── StudioSection.tsx # Studio introduction
-│   ├── VideoSlider.tsx # Horizontal video showcase
-│   ├── Portfolio.tsx   # Work showcase
+│   ├── WorkSection.tsx # Video slider and work showcase
+│   ├── VideoBlocks.tsx # 4-video grid with hover animations
 │   ├── Expertise.tsx   # Capabilities section
 │   ├── Awards.tsx      # Awards and recognition
 │   ├── TrustedBrands.tsx # Client logos
@@ -37,15 +36,18 @@ src/
 ├── hooks/              # Custom React hooks
 ├── types/              # TypeScript type definitions
 ├── utils/              # Utility functions and constants
-└── data/               # Extracted website data
+└── data/               # Extracted website data (gitignored)
 ```
 
 ## 🎨 Design System
 
-- **Typography**: Inter font family with custom weights
+- **Typography**: 
+  - Aeonik font for header navigation
+  - Arial font for main headings and work sections
+  - Inter font for body text
 - **Colors**: Minimal palette with grays and accent colors
 - **Spacing**: Consistent spacing scale using Tailwind
-- **Animations**: Smooth transitions and scroll-triggered effects
+- **Animations**: Smooth transitions, scroll-triggered effects, and rising text animations
 
 ## 🛠️ Development
 
@@ -76,17 +78,36 @@ npm run preview
 ## 📝 Recent Updates
 
 ### Hero Section Implementation ✅
-- Updated typography to match Form&Fun branding
+- Updated typography to match Form&Fun branding with Arial font
 - Implemented large-scale "Form&Fun" text with proper spacing
-- Added video background placeholder
-- Styled CTA button with white background
+- Added Cloudinary video background with autoplay
+- Styled CTA button with proper alignment and hover effects
 - Enhanced text contrast and readability
+- Reduced video section height for better proportions
 
-### Studio Section Implementation ✅
-- Created "The studio" section with centered content
-- Added studio description text
-- Implemented "View our work" CTA button
-- Applied proper spacing and typography
+### Work Section Implementation ✅
+- Created video slider with Swiper.js integration
+- Added 6 Cloudinary videos with drag functionality
+- Implemented "WORK" title and "Selected Work (22-25)" subtitle
+- Added moving marquee text with custom animation
+- Applied Arial font family throughout the section
+- Optimized spacing and responsive design
+
+### Video Blocks Section Implementation ✅
+- Created 4-video grid with alternating wide/narrow layout
+- Implemented hover-to-play video functionality
+- Added rising text animations for titles and subtitles
+- Created responsive grid system for mobile and desktop
+- Applied conditional text colors (black/white) based on video content
+- Added transparent backgrounds and smooth transitions
+
+### Header Implementation ✅
+- Created dynamic header with scroll-based content changes
+- Implemented "Creative Technology Studio" at top, then "Form&Fun" + "Creative Technology Studio" on scroll
+- Added Aeonik font family for navigation
+- Removed "Expertise" from navigation menu
+- Applied rising animations matching video blocks style
+- Optimized positioning to prevent text clipping
 
 ## 🎥 Video Integration
 
@@ -113,11 +134,14 @@ The project supports Cloudinary-hosted videos with the following structure:
 
 ## 📋 Next Steps
 
-- [ ] Implement video backgrounds from Cloudinary
-- [ ] Add remaining sections (Work, Expertise, Awards, etc.)
-- [ ] Implement scroll-triggered animations
-- [ ] Add mobile responsiveness testing
+- [x] Implement video backgrounds from Cloudinary
+- [x] Add Work section with video slider and marquee
+- [x] Add Video Blocks section with 4-video grid
+- [x] Implement scroll-triggered animations
+- [x] Add mobile responsiveness testing
+- [ ] Complete remaining sections (Expertise, Awards, Trusted Brands)
 - [ ] Performance optimization
+- [ ] Final pixel-perfect adjustments
 
 ## React Compiler
 

@@ -60,9 +60,9 @@ const WorkSection = () => {
   }
 
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-white -mt-9">
       {/* Video Slider Section */}
-      <div className="relative w-full h-[28rem] bg-white px-2 md:px-3 lg:px-4 mt-20">
+      <div className="relative w-full h-[28rem] bg-white px-2 md:px-3 lg:px-4 my-24">
         <motion.div
           className="w-full h-full"
           variants={containerVariants}
@@ -113,7 +113,7 @@ const WorkSection = () => {
       </div>
 
       {/* Work Title and Marquee Section */}
-      <div className="relative bg-white py-20 mt-11">
+      <div className="relative bg-white py-2 my-0">
         <motion.div
           className="w-full"
           style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
