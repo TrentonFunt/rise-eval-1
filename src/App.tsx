@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 const Hero = lazy(() => import('./components/Hero'))
 const WorkSection = lazy(() => import('./components/WorkSection'))
 const VideoBlocks = lazy(() => import('./components/VideoBlocks'))
+const ScrollMarquee = lazy(() => import('./components/ScrollMarquee'))
 const Expertise = lazy(() => import('./components/Expertise'))
 const Awards = lazy(() => import('./components/Awards'))
 const TrustedBrands = lazy(() => import('./components/TrustedBrands'))
@@ -33,6 +34,7 @@ function App() {
                     <Hero />
                     <WorkSection />
                     <VideoBlocks />
+                    <ScrollMarquee />
                     <Expertise />
                     <Awards />
                     <TrustedBrands />

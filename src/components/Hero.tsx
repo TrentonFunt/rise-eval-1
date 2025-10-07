@@ -82,7 +82,7 @@ const Hero = () => {
       </div>
 
       {/* Subtitle and CTA Section - Below the video */}
-      <div className="relative z-10 flex items-start justify-center bg-white pt-8 pb-8">
+      <div className="relative z-10 flex items-start justify-center bg-white pt-16 pb-8 mt-12">
         <motion.div
           className="text-left text-black px-8 w-full"
           variants={containerVariants}
@@ -105,7 +105,7 @@ const Hero = () => {
             <motion.sup
               className="font-normal text-black mr-8 inline"
               style={{
-                fontSize: '1.5vw',
+                fontSize: '1.2vw',
                 color: 'rgb(29, 29, 29)',
                 verticalAlign: 'super'
               }}

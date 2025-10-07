@@ -73,7 +73,7 @@ const VideoBlocks = () => {
         )}
 
         {/* Video Container */}
-        <div className="relative w-full h-[23.4rem] sm:h-[26rem] md:h-[33rem] lg:h-[38em] rounded-lg overflow-hidden bg-gray-100">
+        <div className="relative w-full h-[23.4rem] sm:h-[26rem] md:h-[33rem] lg:h-[36em] rounded-lg overflow-hidden bg-gray-100">
           <video
             ref={videoRef}
             src={block.src}
@@ -129,7 +129,7 @@ const VideoBlocks = () => {
   }
 
   return (
-    <section className="relative bg-white py-16">
+    <section className="relative bg-white pt-16">
       <div className="w-full px-1 sm:px-2 md:px-3">
         <div className="space-y-2.5">
           {/* Row 1: [Narrow | Wide] */}
