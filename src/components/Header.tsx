@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = () => {
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div className="w-full px-2 md:px-3 lg:px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <motion.div
             className="flex items-center"
