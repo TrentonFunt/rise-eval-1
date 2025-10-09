@@ -1,208 +1,150 @@
-import { motion } from 'framer-motion'
 
 const Awards = () => {
-    const awards = [
-      {
-        year: "2025",
-        title: "Awwwards",
-        category: "Site of the Day",
-        project: "Form&Fun Portfolio",
-        description: "1x Site of the Day, 1x Portfolio Honors, 1x Developer Award, 1x Honorable Mention"
-      },
-      {
-        year: "2025",
-        title: "Webby Awards",
-        category: "AI, Immersive & Games",
-        project: "Powerade Mind Zone",
-        description: "Recognized for innovative AI and immersive gaming experiences"
-      },
-      {
-        year: "2025",
-        title: "Clio Awards — Gold",
-        category: "Interactive/Experiental",
-        project: "Oreo & Pacman Supermarcade",
-        description: "Gold award for exceptional interactive and experiential design"
-      },
-      {
-        year: "2025",
-        title: "3x Clio Awards — Shortlist",
-        category: "Entertainment & Use of New Realities",
-        project: "Oreo & Pacman Supermarcade",
-        description: "1x Entertainment, 1x Use of New Realities"
-      },
-      {
-        year: "2025",
-        title: "Auggie Award",
-        category: "Best Campaign",
-        project: "Oreo & Pacman Supermarcade",
-        description: "Best campaign award for innovative AR/VR marketing"
-      },
-      {
-        year: "2025",
-        title: "3x ADC Festival — Silver",
-        category: "Craft AR/VR, Digital Out of Home, Point-of-Sale Media",
-        project: "Oreo & Pacman Supermarcade",
-        description: "1x Craft AR/VR, 1x Digital Out of Home, 1x Point-of-Sale Media"
-      },
-      {
-        year: "2025",
-        title: "2x ADC Festival — Bronze",
-        category: "Gaming Experiences & Craft for Spatial Experiences",
-        project: "Oreo & Pacman Supermarcade",
-        description: "1x Gaming Experiences, 1x Craft for Spatial Experiences AR/VR"
-      },
-      {
-        year: "2024",
-        title: "Clio Awards — Silver",
-        category: "Digital/Mobile",
-        project: "Powerade Mind Zone",
-        description: "Silver award for outstanding digital and mobile experience"
-      },
-      {
-        year: "2024",
-        title: "Cannes Lions — Bronze",
-        category: "Outdoor",
-        project: "Oreo & Pacman Supermarcade",
-        description: "Bronze Lion for innovative outdoor advertising campaign"
-      },
-      {
-        year: "2024",
-        title: "4x Cannes Lions — Shortlist",
-        category: "Outdoor",
-        project: "Oreo & Pacman Supermarcade",
-        description: "Multiple shortlist nominations for outdoor category"
-      },
-      {
-        year: "2024",
-        title: "New York Festivals — Bronze",
-        category: "Digital/Mobile: Best use",
-        project: "Oreo & Pacman Supermarcade",
-        description: "Bronze award for best use of digital and mobile technology"
-      }
-    ]
-
-  const stats = [
-    { number: "11", label: "Awards Won" },
-    { number: "20+", label: "Nominations" },
-    { number: "2", label: "Years Running" },
-    { number: "100%", label: "Client Satisfaction" }
+  const awards = [
+    {
+      number: "01",
+      award: "Awwwwards",
+      project: "Form&Fun Portfolio",
+      category: ["1x Site of the Day", "1x Portfolio Honors", "1x Developer Award", "1x Honorable Mention"],
+      year: "2025"
+    },
+    {
+      number: "02", 
+      award: "Webby Awards",
+      project: "Powerade Mind Zone",
+      category: ["AI, Immersive & Games"],
+      year: "2025"
+    },
+    {
+      number: "03",
+      award: "Clio Awards — Gold", 
+      project: "Oreo & Pacman Supermarcade",
+      category: ["Interactive/Experiental"],
+      year: "2025"
+    },
+    {
+      number: "04",
+      award: "3x Clio Awards — Shortlist",
+      project: "Oreo & Pacman Supermarcade", 
+      category: ["1x Entertainment", "1x Use of New Realities"],
+      year: "2025"
+    },
+    {
+      number: "05",
+      award: "Auggie Award",
+      project: "Oreo & Pacman Supermarcade",
+      category: ["Best Campaign"],
+      year: "2025"
+    },
+    {
+      number: "06",
+      award: "3x ADC Festival — Silver",
+      project: "Oreo & Pacman Supermarcade",
+      category: ["1x Craft AR/VR", "1x Digital Out of Home", "1x Point-of-Sale Media"],
+      year: "2025"
+    },
+    {
+      number: "07",
+      award: "2x ADC Festival — Bronze", 
+      project: "Oreo & Pacman Supermarcade",
+      category: ["1x Gaming Experiences", "1x Craft for Spatial Experiences AR/VR"],
+      year: "2025"
+    },
+    {
+      number: "08",
+      award: "Clio Awards — Silver",
+      project: "Powerade Mind Zone",
+      category: ["Digital/Mobile"],
+      year: "2024"
+    },
+    {
+      number: "09",
+      award: "Cannes Lions — Bronze",
+      project: "Oreo & Pacman Supermarcade", 
+      category: ["Outdoor"],
+      year: "2024"
+    },
+    {
+      number: "10",
+      award: "4x Cannes Lions — Shortlist",
+      project: "Oreo & Pacman Supermarcade",
+      category: ["Outdoor"],
+      year: "2024"
+    },
+    {
+      number: "11",
+      award: "New York Festivals — Bronze",
+      project: "Oreo & Pacman Supermarcade",
+      category: ["Digital/Mobile: Best use"],
+      year: "2024"
+    }
   ]
 
   return (
-    <section className="section-padding bg-white">
-      <div className="container">
+    <section className="relative bg-white py-16" style={{ fontFamily: 'Aeonik, sans-serif' }}>
+      <div className="w-full pl-2 pr-4 sm:pl-3 sm:pr-6 md:pl-4 md:pr-8">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-6 text-gray-900">
-            An Award Winning Studio
+        <div className="mb-20">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium text-gray-900" style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}>
+            AN AWARD<br/>
+            WINNING STUDIO
+            <span className="inline-block w-2 h-2 bg-gray-300 rounded-full ml-4"></span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Recognized for excellence in design, innovation, and creative strategy
-          </p>
-        </motion.div>
+        </div>
 
-        {/* Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="text-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                {stat.number}
+        {/* Divider */}
+        <div className="border-b border-gray-200 mb-8"></div>
+
+        {/* Awards Table */}
+        <div className="space-y-0">
+          {awards.map((award) => (
+            <div key={award.number} className="flex items-start py-6 border-b border-gray-200 last:border-b-0">
+              {/* Sequential Number */}
+              <div className="w-16 text-sm font-medium text-gray-400">
+                {award.number}
               </div>
-              <div className="text-sm md:text-base text-gray-600 font-medium">
-                {stat.label}
+
+              {/* Award Name */}
+              <div className="flex-1 text-left mr-8">
+                <h3 className="text-lg font-medium text-gray-900">
+                  {award.award}
+                </h3>
               </div>
-            </motion.div>
+
+              {/* Project */}
+              <div className="flex-1 text-left mr-8">
+                <div className="text-sm text-gray-900 mb-1">
+                  Project
+                </div>
+                <div className="text-sm text-gray-500">
+                  {award.project}
+                </div>
+              </div>
+
+              {/* Category */}
+              <div className="flex-1 text-left mr-8">
+                <div className="text-sm text-gray-900 mb-1">
+                  Category
+                </div>
+                <div className="text-sm text-gray-500 space-y-1">
+                  {award.category.map((cat, catIndex) => (
+                    <div key={catIndex}>{cat}</div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Year */}
+              <div className="w-16 text-right">
+                <div className="text-sm text-gray-900 mb-1">
+                  Year
+                </div>
+                <div className="text-sm text-gray-900">
+                  {award.year}
+                </div>
+              </div>
+            </div>
           ))}
-        </motion.div>
-
-            {/* Awards Table */}
-            <motion.div
-              className="space-y-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              {awards.map((award, index) => (
-                <motion.div
-                  key={`${award.year}-${award.title}`}
-                  className="flex items-center justify-between py-4 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-300 group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Sequential Number */}
-                  <div className="w-12 text-sm font-medium text-gray-500">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-
-                  {/* Award Name */}
-                  <div className="flex-1 text-left">
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">
-                      {award.title}
-                    </h3>
-                  </div>
-
-                  {/* Category */}
-                  <div className="flex-1 text-left">
-                    <div className="text-sm font-medium text-gray-600">
-                      {award.category}
-                    </div>
-                  </div>
-
-                  {/* Project */}
-                  <div className="flex-1 text-left">
-                    <div className="text-sm font-medium text-gray-800">
-                      {award.project}
-                    </div>
-                  </div>
-
-                  {/* Arrow Icon */}
-                  <div className="w-8 flex justify-end">
-                    <svg className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-        {/* Recognition Quote */}
-            <motion.div
-              className="text-center mt-20"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <blockquote className="text-2xl md:text-3xl font-light text-gray-700 italic max-w-4xl mx-auto leading-relaxed">
-                "We forge delightful experiences by blending design, technology, and storytelling to create value for people and brands through interaction."
-              </blockquote>
-              <div className="mt-8 text-gray-500">
-                <cite className="font-medium">— Form&Fun Studio</cite>
-              </div>
-            </motion.div>
+        </div>
       </div>
     </section>
   )

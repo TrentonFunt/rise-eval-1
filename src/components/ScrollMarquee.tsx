@@ -38,7 +38,7 @@ const ScrollMarquee = () => {
   ]
 
   return (
-    <section className="relative bg-white pb-[16px] overflow-hidden">
+    <section className="relative bg-white pb-2 overflow-hidden">
       <div className="w-full flex justify-center">
         <div
           ref={marqueeRef}

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { useRef, useState } from 'react'
@@ -47,7 +46,7 @@ const Expertise = () => {
   }
 
   // Individual Expertise Block Component
-  const ExpertiseBlock = ({ expertise, index }: { expertise: typeof expertiseData[0], index: number }) => {
+  const ExpertiseBlock = ({ expertise }: { expertise: typeof expertiseData[0] }) => {
     const mainVideoRef = useRef<HTMLVideoElement>(null)
     const [isBlockHovered, setIsBlockHovered] = useState(false)
 
@@ -77,17 +76,13 @@ const Expertise = () => {
     }
 
     return (
-        <motion.div
+        <div
           className={`h-[500px] sm:h-[600px] md:h-[650px] lg:h-[650px] rounded-lg overflow-hidden relative group cursor-pointer transition-all duration-300 ${
             isBlockHovered ? getLighterBackground(expertise.backgroundColor) : 'bg-white'
           }`}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        viewport={{ once: true }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
         {/* Video Section */}
         <div className="h-64 sm:h-80 md:h-96 lg:h-[460px] flex items-center justify-center">
           <video
@@ -105,69 +100,43 @@ const Expertise = () => {
         {/* Text Section */}
         <div className="flex-1 flex flex-col justify-start pt-8 pb-8" style={{ fontFamily: 'Aeonik, sans-serif' }}>
           <div className={`w-full space-y-4 transition-all duration-300 ${isBlockHovered ? 'scale-[0.91]' : 'scale-100'}`}>
-            <motion.h3 
-              className="text-5xl font-medium text-gray-900"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              viewport={{ once: true }}
-            >
+            <h3 className="text-5xl font-medium text-gray-900">
               {expertise.title}
-            </motion.h3>
+            </h3>
 
             <div className={`grid grid-cols-2 transition-all duration-300 ${isBlockHovered ? 'gap-[3.66px]' : 'gap-4'}`}>
               {expertise.services.map((column: string[], columnIndex: number) => (
-                <motion.div
-                  key={columnIndex}
-                  className="space-y-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + columnIndex * 0.1 + index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  {column.map((service: string, serviceIndex: number) => (
-                    <motion.div
-                      key={service}
-                      className="text-gray-700 text-sm font-medium leading-tight"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.4 + serviceIndex * 0.1 + index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
+                <div key={columnIndex} className="space-y-2">
+                  {column.map((service: string) => (
+                    <div key={service} className="text-gray-700 text-sm font-medium leading-tight">
                       {service}
-                    </motion.div>
+                    </div>
                   ))}
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <section id="expertise" className="relative bg-white py-16">
+    <section id="expertise" className="relative bg-white pt-4 pb-16">
       <div className="w-full">
         {/* Header */}
-        <motion.div
-          className="mb-4 px-4 sm:px-6 md:px-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+        <div className="mb-4 px-4 sm:px-6 md:px-8">
           <h2 className="text-sm md:text-sm lg:text-md font-medium text-gray-900">
             Expertise & Capabilities
           </h2>
-        </motion.div>
+        </div>
 
         {/* Desktop Layout - All blocks side by side */}
         <div className="hidden lg:block">
           <div className="w-full px-4">
             <div className="grid grid-cols-3 gap-4">
-              {expertiseData.map((expertise, index) => (
-                <ExpertiseBlock key={expertise.id} expertise={expertise} index={index} />
+              {expertiseData.map((expertise) => (
+                <ExpertiseBlock key={expertise.id} expertise={expertise} />
               ))}
             </div>
           </div>
@@ -186,19 +155,13 @@ const Expertise = () => {
           >
             {expertiseData.map((expertise) => (
               <SwiperSlide key={expertise.id}>
-                <ExpertiseBlock expertise={expertise} index={0} />
+                <ExpertiseBlock expertise={expertise} />
               </SwiperSlide>
             ))}
           </Swiper>
 
           {/* Navigation Dots - Only show on mobile/tablet */}
-          <motion.div
-            className="flex justify-center space-x-3 mt-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
+          <div className="flex justify-center space-x-3 mt-8">
             {expertiseData.map((_, index) => (
               <button
                 key={index}
@@ -208,7 +171,7 @@ const Expertise = () => {
                 onClick={() => swiperRef.current?.swiper?.slideTo(index)}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

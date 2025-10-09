@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import Lottie from 'lottie-react'
+import formFunAnimation from '../assets/form-fun-lottie.json'
 
 const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [animationComplete, setAnimationComplete] = useState(false)
+  const [lottieReady, setLottieReady] = useState(false)
+
   // Add the studio-text-indent styling - much larger indentation
   const studioTextIndentStyle = {
     marginLeft: '30%'
@@ -40,49 +47,100 @@ const Hero = () => {
   }
 
 
+
+  useEffect(() => {
+    // When Lottie animation completes, immediately trigger the shrink animation
+    if (animationComplete) {
+      setIsLoaded(true)
+    }
+  }, [animationComplete])
+
+  // Set Lottie ready state to prevent spinning loader
+  useEffect(() => {
+    // Set lottieReady to true after a very short delay to ensure Lottie is loaded
+    const timer = setTimeout(() => {
+      setLottieReady(true)
+    }, 50)
+    
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Show nothing until Lottie is ready to prevent spinning loader
+  if (!lottieReady) {
+    return null
+  }
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: homeIntroStyles }} />
       <section className="relative bg-white">
       {/* Hero Title Section */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center bg-white">
-        <motion.div
-          className="text-center text-black px-4 max-w-4xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Main Heading */}
-          <motion.h1
-            className="text-7xl md:text-9xl lg:text-[12rem] font-light leading-[0.8] tracking-tight text-black"
-            style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
-            variants={itemVariants}
-          >
-            <div className="font-light">Form</div>
-            <div className="font-bold">&Fun</div>
-          </motion.h1>
-        </motion.div>
-      </div>
-
-      {/* Video Section */}
-      <div className="relative w-full h-[87vh] bg-white px-2 md:px-3 lg:px-4">
-        <div className="w-full h-full rounded-lg overflow-hidden">
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls={false}
-          >
-            <source src="https://res.cloudinary.com/dfw7cyzig/video/upload/v1759691457/sizzle-form_hlge8z.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      <motion.div 
+        className="relative z-10 flex items-center justify-center bg-white"
+        initial={{ height: '100vh' }}
+        animate={{
+          height: isLoaded ? '60vh' : '100vh'
+        }}
+        transition={{
+          duration: 0.8,
+          ease: "easeInOut",
+          delay: isLoaded ? 0.05 : 0
+        }}
+      >
+        <div className="text-center text-black px-4 max-w-4xl mx-auto">
+          {/* Form&Fun SVG Logo */}
+          <div className="flex items-center justify-center">
+            {!animationComplete ? (
+              <Lottie
+                animationData={formFunAnimation}
+                loop={false}
+                autoplay={true}
+                onComplete={() => setAnimationComplete(true)}
+                style={{ 
+                  width: '100%', 
+                  height: 'auto',
+                  maxWidth: '600px'
+                }}
+                rendererSettings={{
+                  preserveAspectRatio: 'xMidYMid meet'
+                }}
+              />
+            ) : (
+              <img 
+                src="/form-fun-logo.svg" 
+                alt="Form&Fun" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto',
+                  maxWidth: '600px'
+                }}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Subtitle and CTA Section - Below the video */}
-      <div className="relative z-10 flex items-start justify-center bg-white pt-16 pb-8 mt-12">
+      {/* Video Section - Only show after animation completes */}
+      {isLoaded && (
+        <>
+          <div className="relative w-full h-[87vh] bg-white px-2 md:px-3 lg:px-4">
+            <div className="w-full h-full rounded-lg overflow-hidden">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls={false}
+              >
+                <source src="https://res.cloudinary.com/dfw7cyzig/video/upload/v1759691457/sizzle-form_hlge8z.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
+          {/* Subtitle and CTA Section - Below the video */}
+          <div className="relative z-10 flex items-start justify-center bg-white pt-16 pb-8 mt-12">
         <motion.div
           className="text-left text-black px-8 w-full"
           variants={containerVariants}
@@ -152,6 +210,8 @@ const Hero = () => {
           </div>
         </motion.div>
       </div>
+        </>
+      )}
     </section>
     </>
   )

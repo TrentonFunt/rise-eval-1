@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -21,6 +21,11 @@ const LoadingSpinner = () => (
 )
 
 function App() {
+  // Scroll to top on page load to ensure we start from hero section
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <ErrorBoundary>
       <Router>
