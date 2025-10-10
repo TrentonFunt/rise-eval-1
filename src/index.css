@@ -21,6 +21,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Enable hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 body {
@@ -28,6 +31,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Performance optimizations */
+  will-change: auto;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  /* Enable GPU acceleration */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .app {
@@ -87,4 +99,94 @@ main {
 
 .swiper-dragging .swiper-slide {
   pointer-events: none;
+}
+
+/* Performance-optimized animation classes */
+.smooth-transform {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.smooth-opacity {
+  will-change: opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.smooth-scale {
+  transform: translateZ(0) scale(1);
+  -webkit-transform: translateZ(0) scale(1);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* High-performance video container */
+.video-container {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+/* Optimized for 60fps animations */
+.fps-optimized {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* GPU-accelerated hover effects */
+.gpu-hover {
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+.gpu-hover:hover {
+  transform: translateZ(0) scale(1.05);
+  -webkit-transform: translateZ(0) scale(1.05);
+}
+
+/* Optimized text rendering */
+.text-optimized {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-stroke: 0.01em transparent;
+}
+
+/* Custom Cursors */
+.cursor-view {
+  cursor: url('/cursors/view.svg') 16 6, auto;
+}
+
+.cursor-soon {
+  cursor: url('/cursors/soon.svg') 16 6, auto;
+}
+
+.cursor-drag {
+  cursor: url('/cursors/drag.svg') 16 6, auto;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

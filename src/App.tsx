@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Suspense, lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -21,6 +21,9 @@ const LoadingSpinner = () => (
 )
 
 function App() {
+  // Shared state for hero animation completion
+  const [isHeroLoaded, setIsHeroLoaded] = useState(false)
+
   // Scroll to top on page load to ensure we start from hero section
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -30,13 +33,13 @@ function App() {
     <ErrorBoundary>
       <Router>
         <div className="app">
-          <Header />
+          <Header isHeroLoaded={isHeroLoaded} />
           <main>
             <Routes>
               <Route path="/" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <ErrorBoundary>
-                    <Hero />
+                    <Hero onHeroLoaded={setIsHeroLoaded} />
                     <WorkSection />
                     <VideoBlocks />
                     <ScrollMarquee />

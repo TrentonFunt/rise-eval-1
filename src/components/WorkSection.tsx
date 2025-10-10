@@ -94,7 +94,7 @@ const WorkSection = () => {
           >
             {videos.map((video) => (
               <SwiperSlide key={video.id} className="h-full">
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-100">
+                <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-100 cursor-drag">
                   <video
                     src={video.src}
                     className="w-full h-full object-cover"

@@ -99,7 +99,7 @@ const Expertise = () => {
 
         {/* Text Section */}
         <div className="flex-1 flex flex-col justify-start pt-8 pb-8" style={{ fontFamily: 'Aeonik, sans-serif' }}>
-          <div className={`w-full space-y-4 transition-all duration-300 ${isBlockHovered ? 'scale-[0.91]' : 'scale-100'}`}>
+          <div className={`w-full space-y-4 transition-all duration-300 smooth-scale ${isBlockHovered ? 'scale-[0.91]' : 'scale-100'}`}>
             <h3 className="text-5xl font-medium text-gray-900">
               {expertise.title}
             </h3>

@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useScrollPosition } from '../hooks/useScrollPosition'
-import type { HeaderProps, NavigationItem } from '../types'
+import type { NavigationItem } from '../types'
 
-const Header: React.FC<HeaderProps> = () => {
+interface HeaderProps {
+  isHeroLoaded: boolean
+}
+
+const Header: React.FC<HeaderProps> = ({ isHeroLoaded }) => {
   const { isScrolled } = useScrollPosition(50)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
@@ -23,22 +27,35 @@ const Header: React.FC<HeaderProps> = () => {
     { name: 'Contact', href: '#contact' }
   ]
 
+  // Don't render header until hero animation is complete
+  if (!isHeroLoaded) {
+    return null
+  }
+
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-250 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-250 fps-optimized ${
         isScrolled ? 'bg-white/95 backdrop-blur-md' : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.25, 0.8, 0.25, 1], // Custom cubic-bezier for smoother animation
+        type: "tween"
+      }}
     >
       <div className="w-full px-2 md:px-3 lg:px-4">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <motion.div
-            className="flex items-center"
+            className="flex items-center gpu-hover"
             whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+            transition={{ 
+              duration: 0.2, 
+              ease: [0.25, 0.8, 0.25, 1],
+              type: "tween"
+            }}
           >
             <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
               <div className="w-4 h-4 bg-white rounded-sm"></div>
@@ -49,7 +66,7 @@ const Header: React.FC<HeaderProps> = () => {
           <div className="flex-1 text-center">
             <div className="overflow-hidden">
               <motion.h1
-                className="text-lg font-medium text-black"
+                className="text-lg font-medium text-black smooth-transform"
                 style={{ fontFamily: 'Aeonik, sans-serif' }}
                 initial={{ y: "0%", opacity: 1 }}
                 animate={{ 
@@ -59,6 +76,7 @@ const Header: React.FC<HeaderProps> = () => {
                 transition={{
                   duration: 0.6,
                   ease: [0.25, 0.8, 0.25, 1],
+                  type: "tween"
                 }}
               >
                 Creative Technology Studio
@@ -70,7 +88,7 @@ const Header: React.FC<HeaderProps> = () => {
           <div className="flex-1 text-center">
             <div className="overflow-hidden">
               <motion.h1
-                className="text-lg font-medium text-black"
+                className="text-lg font-medium text-black smooth-transform"
                 style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
                 initial={{ y: "100%", opacity: 0 }}
                 animate={{ 
@@ -80,6 +98,7 @@ const Header: React.FC<HeaderProps> = () => {
                 transition={{
                   duration: 0.6,
                   ease: [0.25, 0.8, 0.25, 1],
+                  type: "tween"
                 }}
               >
                 Form&Fun

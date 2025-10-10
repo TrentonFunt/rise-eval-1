@@ -3,10 +3,19 @@ import { useState, useEffect } from 'react'
 import Lottie from 'lottie-react'
 import formFunAnimation from '../assets/form-fun-lottie.json'
 
-const Hero = () => {
+interface HeroProps {
+  onHeroLoaded: (loaded: boolean) => void
+}
+
+const Hero = ({ onHeroLoaded }: HeroProps) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [animationComplete, setAnimationComplete] = useState(false)
   const [lottieReady, setLottieReady] = useState(false)
+
+  // Notify parent when hero is loaded
+  useEffect(() => {
+    onHeroLoaded(isLoaded)
+  }, [isLoaded, onHeroLoaded])
 
   // Add the studio-text-indent styling - much larger indentation
   const studioTextIndentStyle = {
@@ -76,15 +85,16 @@ const Hero = () => {
       <section className="relative bg-white">
       {/* Hero Title Section */}
       <motion.div 
-        className="relative z-10 flex items-center justify-center bg-white"
+        className="relative z-10 flex items-center justify-center bg-white fps-optimized"
         initial={{ height: '100vh' }}
         animate={{
           height: isLoaded ? '60vh' : '100vh'
         }}
         transition={{
           duration: 0.8,
-          ease: "easeInOut",
-          delay: isLoaded ? 0.05 : 0
+          ease: [0.25, 0.8, 0.25, 1], // Custom cubic-bezier for smoother animation
+          delay: isLoaded ? 0.05 : 0,
+          type: "tween"
         }}
       >
         <div className="text-center text-black px-4 max-w-4xl mx-auto">
@@ -142,10 +152,15 @@ const Hero = () => {
           {/* Subtitle and CTA Section - Below the video */}
           <div className="relative z-10 flex items-start justify-center bg-white pt-16 pb-8 mt-12">
         <motion.div
-          className="text-left text-black px-8 w-full"
+          className="text-left text-black px-8 w-full smooth-transform"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
+          transition={{
+            duration: 0.6,
+            ease: [0.25, 0.8, 0.25, 1],
+            type: "tween"
+          }}
         >
           {/* "The studio" header and subtitle in same text flow */}
           <div 

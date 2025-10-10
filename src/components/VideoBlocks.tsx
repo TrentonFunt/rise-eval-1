@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import LazyVideo from './LazyVideo'
 
 const VideoBlocks = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  
   // Video data with actual Cloudinary URLs
   const videoBlocks = [
     {
@@ -55,9 +58,17 @@ const VideoBlocks = () => {
       }
     }
 
+    // Determine cursor class based on video type
+    const getCursorClass = () => {
+      if (block.title === "Widllet") {
+        return "cursor-soon"
+      }
+      return "cursor-view"
+    }
+
     return (
       <motion.div
-        className="relative group cursor-pointer"
+        className={`relative group ${getCursorClass()}`}
         variants={itemVariants}
         transition={{ duration: 0.3 }}
         onMouseEnter={handleMouseEnter}
@@ -73,8 +84,8 @@ const VideoBlocks = () => {
         )}
 
         {/* Video Container */}
-        <div className="relative w-full h-[23.4rem] sm:h-[26rem] md:h-[33rem] lg:h-[36em] rounded-lg overflow-hidden bg-gray-100">
-          <video
+        <div className="relative w-full h-[23.4rem] sm:h-[26rem] md:h-[33rem] lg:h-[36em] rounded-lg overflow-hidden bg-gray-100 video-container">
+          <LazyVideo
             ref={videoRef}
             src={block.src}
             className="w-full h-full object-cover"
@@ -83,6 +94,8 @@ const VideoBlocks = () => {
             playsInline
             controls={false}
             preload="metadata"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
           
           {/* Overlay on hover */}
@@ -93,7 +106,7 @@ const VideoBlocks = () => {
             {/* Title - Left side with word wrapping */}
             <div className="absolute top-5 left-6">
               <div className="overflow-hidden">
-                <h3 className={`font-medium transform translate-y-full group-hover:translate-y-0 transition-transform ease-out group-hover:duration-600 duration-0 ${block.id === 2 || block.id === 3 ? 'text-black' : 'text-white'}`} style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif', fontSize: '0.875em', lineHeight: '1.25em' }}>
+                <h3 className={`font-medium transform translate-y-full group-hover:translate-y-0 transition-transform ease-out group-hover:duration-600 duration-0 smooth-transform ${block.id === 2 || block.id === 3 ? 'text-black' : 'text-white'}`} style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif', fontSize: '0.875em', lineHeight: '1.25em' }}>
                   {block.title.split(' ').map((word, index) => (
                     <div key={index}>{word}</div>
                   ))}
@@ -104,7 +117,7 @@ const VideoBlocks = () => {
             {/* Subtitle - Center */}
             <div className="absolute top-5 left-1/2 transform -translate-x-1/2">
               <div className="overflow-hidden">
-                <p className={`font-light transform translate-y-full group-hover:translate-y-0 transition-transform ease-out delay-100 group-hover:duration-600 duration-0 ${block.id === 2 || block.id === 3 ? 'text-black/90' : 'text-white/90'}`} style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif', fontSize: '0.875em', lineHeight: '1.25em' }}>
+                <p className={`font-light transform translate-y-full group-hover:translate-y-0 transition-transform ease-out delay-100 group-hover:duration-600 duration-0 smooth-transform ${block.id === 2 || block.id === 3 ? 'text-black/90' : 'text-white/90'}`} style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif', fontSize: '0.875em', lineHeight: '1.25em' }}>
                   {block.subtitle}
                 </p>
               </div>
@@ -115,7 +128,7 @@ const VideoBlocks = () => {
               <div className="overflow-hidden">
                 <a
                   href="#" 
-                  className="w-8 h-8 bg-transparent hover:bg-transparent rounded-full flex items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-transform ease-out delay-200 group-hover:duration-600 duration-0"
+                  className="w-8 h-8 bg-transparent hover:bg-transparent rounded-full flex items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-transform ease-out delay-200 group-hover:duration-600 duration-0 smooth-transform"
                 >
                   <span className={`text-xl font-light ${block.id === 2 || block.id === 3 ? 'text-black' : 'text-white'}`} style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}>+</span>
                 </a>
@@ -131,17 +144,56 @@ const VideoBlocks = () => {
   return (
     <section className="relative bg-white pt-16">
       <div className="w-full px-1 sm:px-2 md:px-3">
-        <div className="space-y-2.5">
+        {/* Desktop/Tablet Layout - Hidden on mobile */}
+        <div className="hidden sm:block space-y-2.5">
           {/* Row 1: [Narrow | Wide] */}
-            <div className="grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] md:grid-cols-[2fr_1fr] lg:grid-cols-[2fr_1fr] gap-3.5 sm:gap-3.5 md:gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-[1.5fr_1fr] md:grid-cols-[2fr_1fr] lg:grid-cols-[2fr_1fr] gap-3.5 sm:gap-3.5 md:gap-3.5">
             <VideoBlock block={videoBlocks[0]} />
             <VideoBlock block={videoBlocks[1]} />
           </div>
 
           {/* Row 2: [Wide | Narrow] */}
-            <div className="grid grid-cols-1 sm:grid-cols-[1fr_1.5fr] md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-3.5 sm:gap-3.5 md:gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_1.5fr] md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_2fr] gap-3.5 sm:gap-3.5 md:gap-3.5">
             <VideoBlock block={videoBlocks[2]} />
             <VideoBlock block={videoBlocks[3]} />
+          </div>
+        </div>
+
+        {/* Mobile Layout - Slider with navigation dots */}
+        <div className="sm:hidden">
+          {/* Video Slider Container */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{
+                transform: `translateX(-${currentSlide * 100}%)`,
+                width: `${videoBlocks.length * 100}%`
+              }}
+            >
+              {videoBlocks.map((block) => (
+                <div 
+                  key={block.id} 
+                  className="w-full flex-shrink-0 px-2"
+                  style={{ width: `${100 / videoBlocks.length}%` }}
+                >
+                  <VideoBlock block={block} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Dots */}
+          <div className="flex justify-center space-x-3 mt-8">
+            {videoBlocks.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-gray-900' : 'bg-gray-300'
+                }`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

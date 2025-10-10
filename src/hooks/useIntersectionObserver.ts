@@ -9,10 +9,10 @@ interface UseIntersectionObserverOptions {
 export const useIntersectionObserver = (
   options: UseIntersectionObserverOptions = {}
 ) => {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options
+  const { threshold = 0.1, rootMargin = '0px' } = options
   const [isIntersecting, setIsIntersecting] = useState(false)
   const [hasIntersected, setHasIntersected] = useState(false)
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const element = ref.current
@@ -29,7 +29,7 @@ export const useIntersectionObserver = (
       },
       {
         threshold,
-        rootMargin
+        rootMargin,
       }
     )
 
@@ -40,9 +40,5 @@ export const useIntersectionObserver = (
     }
   }, [threshold, rootMargin, hasIntersected])
 
-  return {
-    ref,
-    isIntersecting: triggerOnce ? (hasIntersected || isIntersecting) : isIntersecting,
-    hasIntersected
-  }
+  return { ref, isIntersecting, hasIntersected }
 }

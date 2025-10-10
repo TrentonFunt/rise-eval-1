@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { performanceTransitions, performanceClasses } from '../utils/performance'
 
 const TrustedBrands = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -103,10 +104,10 @@ const TrustedBrands = () => {
 
         {/* Brand Sliders */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 ${performanceClasses.gpuAccelerated}`}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ ...performanceTransitions.medium, delay: 0.2 }}
           viewport={{ once: true }}
         >
           {brandSliders.map((slider, sliderIndex) => {
@@ -116,13 +117,13 @@ const TrustedBrands = () => {
             return (
             <motion.div
               key={sliderIndex}
-              className="relative h-56 rounded-lg overflow-hidden cursor-pointer group transition-colors duration-300"
+              className={`relative h-56 rounded-lg overflow-hidden cursor-pointer group transition-colors duration-300 ${performanceClasses.gpuAccelerated}`}
               style={{
                 backgroundColor: hoveredSlider === sliderIndex ? hoverColor : '#f3f4f6'
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 + sliderIndex * 0.1 }}
+              transition={{ ...performanceTransitions.medium, delay: 0.3 + sliderIndex * 0.1 }}
               viewport={{ once: true }}
               onMouseEnter={() => setHoveredSlider(sliderIndex)}
               onMouseLeave={() => setHoveredSlider(null)}
@@ -143,32 +144,26 @@ const TrustedBrands = () => {
                     <motion.img
                       src={brand.svg}
                       alt={brand.name}
-                      className="h-12 w-auto"
+                      className={`h-12 w-auto ${performanceClasses.smoothScale}`}
                       initial={{ scale: 1, opacity: 1 }}
                       animate={{ 
                         scale: hoveredSlider === sliderIndex ? 0.9 : 1,
                         opacity: hoveredSlider === sliderIndex ? 0 : 1
                       }}
-                      transition={{ 
-                        duration: 0.4,
-                        ease: [0.25, 0.8, 0.25, 1]
-                      }}
+                      transition={performanceTransitions.medium}
                     />
                     
                     {/* Colored Hover SVG */}
                     <motion.img
                       src={brand.svgHover}
                       alt={brand.name}
-                      className="h-12 w-auto absolute inset-0 m-auto"
+                      className={`h-12 w-auto absolute inset-0 m-auto ${performanceClasses.smoothScale}`}
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ 
                         scale: hoveredSlider === sliderIndex ? 1 : 0.9,
                         opacity: hoveredSlider === sliderIndex ? 1 : 0
                       }}
-                      transition={{ 
-                        duration: 0.4,
-                        ease: [0.25, 0.8, 0.25, 1]
-                      }}
+                      transition={performanceTransitions.medium}
                     />
                   </div>
                 ))}

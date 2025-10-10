@@ -1,5 +1,9 @@
 
+import { useState } from 'react'
+
 const Awards = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  
   const awards = [
     {
       number: "01",
@@ -95,8 +99,8 @@ const Awards = () => {
         {/* Divider */}
         <div className="border-b border-gray-200 mb-8"></div>
 
-        {/* Awards Table */}
-        <div className="space-y-0">
+        {/* Desktop/Tablet Awards Table - Hidden on mobile */}
+        <div className="hidden sm:block space-y-0">
           {awards.map((award) => (
             <div key={award.number} className="flex items-start py-6 border-b border-gray-200 last:border-b-0">
               {/* Sequential Number */}
@@ -144,6 +148,88 @@ const Awards = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Mobile Awards Slider */}
+        <div className="sm:hidden">
+          {/* Awards Slider Container */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{
+                transform: `translateX(-${currentSlide * 100}%)`,
+                width: `${awards.length * 100}%`
+              }}
+            >
+              {awards.map((award) => (
+                <div 
+                  key={award.number} 
+                  className="w-full flex-shrink-0 px-2"
+                  style={{ width: `${100 / awards.length}%` }}
+                >
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    {/* Sequential Number */}
+                    <div className="text-sm font-medium text-gray-400 mb-2">
+                      {award.number}
+                    </div>
+
+                    {/* Award Name */}
+                    <div className="mb-4">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {award.award}
+                      </h3>
+                    </div>
+
+                    {/* Project */}
+                    <div className="mb-4">
+                      <div className="text-sm text-gray-900 mb-1">
+                        Project
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {award.project}
+                      </div>
+                    </div>
+
+                    {/* Category */}
+                    <div className="mb-4">
+                      <div className="text-sm text-gray-900 mb-1">
+                        Category
+                      </div>
+                      <div className="text-sm text-gray-500 space-y-1">
+                        {award.category.map((cat, catIndex) => (
+                          <div key={catIndex}>{cat}</div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Year */}
+                    <div>
+                      <div className="text-sm text-gray-900 mb-1">
+                        Year
+                      </div>
+                      <div className="text-sm text-gray-900">
+                        {award.year}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Dots */}
+          <div className="flex justify-center space-x-3 mt-8">
+            {awards.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-gray-900' : 'bg-gray-300'
+                }`}
+                onClick={() => setCurrentSlide(index)}
+                aria-label={`Go to award ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
